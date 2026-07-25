@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { updateUser, setShopId } from '../store/authSlice';
-import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import axiosClient from '../api/axiosClient';
 
 const Onboarding: React.FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1); // Step 1: Role Selection Modal, Step 2: Storefront Details Form
@@ -112,21 +110,21 @@ const Onboarding: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg text-brand-text flex flex-col justify-center items-center py-12 px-4 relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950 text-slate-800 dark:text-slate-100 flex flex-col justify-center items-center py-12 px-4 relative overflow-hidden transition-colors duration-300">
       
       {/* Animated glowing mesh gradients matching brand identity */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-purple-500/10 blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse"></div>
-      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full bg-violet-400/5 blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-emerald-500/10 blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-teal-500/10 blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full bg-emerald-400/5 blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
 
       {/* STEP 1: INTERACTIVE POPUP / MODAL OVERLAY */}
       {step === 1 && (
         <div className="w-full max-w-2xl z-15 transform transition-all duration-500 animate-fadeIn">
-          <div className="glass-panel rounded-3xl p-8 border border-brand-border text-center shadow-2xl relative bg-brand-card/90">
+          <div className="glass-panel rounded-3xl p-8 border border-emerald-100/50 dark:border-emerald-800/30 text-center shadow-2xl relative bg-white/70 dark:bg-emerald-950/40 backdrop-blur-xl">
             
             {/* Header branding */}
             <div className="mb-8">
-              <span className="px-3 py-1 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-extrabold uppercase tracking-widest border border-indigo-500/20">
+              <span className="px-3.5 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-[10px] font-extrabold uppercase tracking-widest border border-emerald-500/20">
                 Setup Account
               </span>
               <h2 className="text-3xl font-black tracking-tight text-brand-text mt-4">
@@ -155,8 +153,8 @@ const Onboarding: React.FC = () => {
                 onClick={() => setSelectedRole('CUSTOMER')}
                 className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 relative group flex flex-col justify-between ${
                   selectedRole === 'CUSTOMER'
-                    ? 'border-indigo-500 bg-indigo-500/5 ring-4 ring-indigo-500/10 shadow-lg scale-102'
-                    : 'border-brand-border bg-brand-card/40 hover:border-brand-border/80'
+                    ? 'border-emerald-500 bg-emerald-500/5 ring-4 ring-emerald-500/10 shadow-lg scale-102'
+                    : 'border-brand-border bg-brand-card/45 hover:border-brand-border/80'
                 }`}
               >
                 <div>
@@ -167,7 +165,7 @@ const Onboarding: React.FC = () => {
                   </p>
                 </div>
                 {selectedRole === 'CUSTOMER' && (
-                  <span className="absolute top-3 right-3 text-xs bg-indigo-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold">✓</span>
+                  <span className="absolute top-3 right-3 text-xs bg-emerald-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">✓</span>
                 )}
               </div>
 
@@ -176,8 +174,8 @@ const Onboarding: React.FC = () => {
                 onClick={() => setSelectedRole('SHOP_OWNER')}
                 className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 relative group flex flex-col justify-between ${
                   selectedRole === 'SHOP_OWNER'
-                    ? 'border-indigo-500 bg-indigo-500/5 ring-4 ring-indigo-500/10 shadow-lg scale-102'
-                    : 'border-brand-border bg-brand-card/40 hover:border-brand-border/80'
+                    ? 'border-emerald-500 bg-emerald-500/5 ring-4 ring-emerald-500/10 shadow-lg scale-102'
+                    : 'border-brand-border bg-brand-card/45 hover:border-brand-border/80'
                 }`}
               >
                 <div>
@@ -188,7 +186,7 @@ const Onboarding: React.FC = () => {
                   </p>
                 </div>
                 {selectedRole === 'SHOP_OWNER' && (
-                  <span className="absolute top-3 right-3 text-xs bg-indigo-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold">✓</span>
+                  <span className="absolute top-3 right-3 text-xs bg-emerald-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">✓</span>
                 )}
               </div>
 
@@ -197,8 +195,8 @@ const Onboarding: React.FC = () => {
                 onClick={() => setSelectedRole('DELIVERY_PARTNER')}
                 className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 relative group flex flex-col justify-between ${
                   selectedRole === 'DELIVERY_PARTNER'
-                    ? 'border-indigo-500 bg-indigo-500/5 ring-4 ring-indigo-500/10 shadow-lg scale-102'
-                    : 'border-brand-border bg-brand-card/40 hover:border-brand-border/80'
+                    ? 'border-emerald-500 bg-emerald-500/5 ring-4 ring-emerald-500/10 shadow-lg scale-102'
+                    : 'border-brand-border bg-brand-card/45 hover:border-brand-border/80'
                 }`}
               >
                 <div>
@@ -209,7 +207,7 @@ const Onboarding: React.FC = () => {
                   </p>
                 </div>
                 {selectedRole === 'DELIVERY_PARTNER' && (
-                  <span className="absolute top-3 right-3 text-xs bg-indigo-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold">✓</span>
+                  <span className="absolute top-3 right-3 text-xs bg-emerald-500 text-white rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">✓</span>
                 )}
               </div>
             </div>
@@ -218,7 +216,7 @@ const Onboarding: React.FC = () => {
             <button
               onClick={handleSaveRole}
               disabled={loading}
-              className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white rounded-xl font-bold text-xs transition-all shadow-lg active:scale-98 flex justify-center items-center cursor-pointer"
+              className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl font-bold text-xs transition-all shadow-md hover:shadow-lg shadow-emerald-600/10 active:scale-98 flex justify-center items-center cursor-pointer"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -235,10 +233,10 @@ const Onboarding: React.FC = () => {
       {/* STEP 2: BUSINESS DETAILS REGISTER (ONLY VISIBLE FOR SHOP OWNER ROLE) */}
       {step === 2 && (
         <div className="w-full max-w-2xl z-15 transform transition-all duration-500 animate-slideUp">
-          <div className="glass-panel rounded-3xl p-8 border border-brand-border shadow-2xl bg-brand-card/90">
+          <div className="glass-panel rounded-3xl p-8 border border-emerald-100/50 dark:border-emerald-800/30 shadow-2xl bg-white/70 dark:bg-emerald-950/40 backdrop-blur-xl">
             
             <div className="text-center mb-6">
-              <span className="px-3 py-1 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-extrabold uppercase tracking-widest border border-indigo-500/20">
+              <span className="px-3.5 py-1 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-[10px] font-extrabold uppercase tracking-widest border border-emerald-500/20">
                 Step 2: Business details
               </span>
               <h2 className="text-2xl font-black tracking-tight text-brand-text mt-3">
@@ -274,7 +272,7 @@ const Onboarding: React.FC = () => {
                 <div>
                   <label className="block text-[10px] font-bold text-brand-text-muted uppercase tracking-wider mb-1">Service Specialty</label>
                   <select
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopType}
                     onChange={(e) => setShopType(e.target.value)}
                   >
@@ -295,7 +293,7 @@ const Onboarding: React.FC = () => {
                   type="text"
                   required
                   placeholder="Central Market Grocery"
-                  className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                   value={shopName}
                   onChange={(e) => setShopName(e.target.value)}
                 />
@@ -306,7 +304,7 @@ const Onboarding: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Organic farm produce, dairy, bakery, and daily essentials"
-                  className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                   value={shopDescription}
                   onChange={(e) => setShopDescription(e.target.value)}
                 />
@@ -318,7 +316,7 @@ const Onboarding: React.FC = () => {
                   type="text"
                   required
                   placeholder="Broadway Ave 42nd St, NYC"
-                  className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                   value={shopAddress}
                   onChange={(e) => setShopAddress(e.target.value)}
                 />
@@ -330,7 +328,7 @@ const Onboarding: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleGetLocation}
-                    className="text-[10px] text-indigo-500 hover:underline transition-colors font-bold cursor-pointer"
+                    className="text-[10px] text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 hover:underline transition-colors font-bold cursor-pointer"
                   >
                     📍 Get Current Location
                   </button>
@@ -341,7 +339,7 @@ const Onboarding: React.FC = () => {
                     step="any"
                     required
                     placeholder="Latitude"
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopLatitude}
                     onChange={(e) => setShopLatitude(parseFloat(e.target.value))}
                   />
@@ -350,7 +348,7 @@ const Onboarding: React.FC = () => {
                     step="any"
                     required
                     placeholder="Longitude"
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopLongitude}
                     onChange={(e) => setShopLongitude(parseFloat(e.target.value))}
                   />
@@ -363,7 +361,7 @@ const Onboarding: React.FC = () => {
                   <input
                     type="text"
                     placeholder="+1-555-0100"
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopPhone}
                     onChange={(e) => setShopPhone(e.target.value)}
                   />
@@ -373,7 +371,7 @@ const Onboarding: React.FC = () => {
                   <input
                     type="email"
                     placeholder="shop@example.com"
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopEmail}
                     onChange={(e) => setShopEmail(e.target.value)}
                   />
@@ -386,7 +384,7 @@ const Onboarding: React.FC = () => {
                   <input
                     type="text"
                     placeholder="https://example.com/logo.png"
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopLogoUrl}
                     onChange={(e) => setShopLogoUrl(e.target.value)}
                   />
@@ -396,7 +394,7 @@ const Onboarding: React.FC = () => {
                   <input
                     type="text"
                     placeholder="https://example.com/banner.png"
-                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-indigo-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 bg-brand-input border border-brand-input-border rounded-xl text-xs text-brand-text focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all duration-200"
                     value={shopBannerUrl}
                     onChange={(e) => setShopBannerUrl(e.target.value)}
                   />
@@ -406,7 +404,7 @@ const Onboarding: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white rounded-xl font-bold text-xs transition-all shadow-lg active:scale-98 flex justify-center items-center mt-6 cursor-pointer"
+                className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl font-bold text-xs transition-all shadow-md hover:shadow-lg shadow-emerald-600/10 active:scale-98 flex justify-center items-center mt-6 cursor-pointer"
               >
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

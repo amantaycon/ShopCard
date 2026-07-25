@@ -41,6 +41,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
         setLoading(false);
       })
       .catch(err => {
+        console.error("Fetch profile settings error:", err);
         setError('Failed to fetch profile settings.');
         setLoading(false);
       });
